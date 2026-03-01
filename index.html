@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parv Mer | Flutter Developer</title>
+  <meta name="description" content="Flutter Developer crafting production-ready mobile applications with real-time GPS tracking, Firebase backends, and exceptional user interfaces." />
+  <meta name="theme-color" content="#060a10" />
+
+  <!-- DNS prefetch for external resources -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+
+  <!-- Fonts — display=swap prevents FOIT, crossorigin needed for preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome — defer non-render-blocking version -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" /></noscript>
+
+  <!-- GSAP — load synchronously (needed before DOMContentLoaded) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ============================
+     LOADER
+============================= -->
+<div id="loader">
+  <canvas id="loader-canvas"></canvas>
+  <div class="loader-content">
+    <div class="loader-tagline" id="loader-tagline">Architecting Cross-Platform Apps</div>
+    <div class="loader-progress">
+      <div class="loader-bar-track">
+        <div class="loader-bar" id="loader-bar"></div>
+      </div>
+      <div class="loader-percent" id="loader-percent">0%</div>
+    </div>
+  </div>
+  <div class="loader-status" id="loader-status">Initializing...</div>
+</div>
+
+<!-- ============================
+     CURSOR (desktop only)
+============================= -->
+<div class="cursor-dot" id="cursor-dot"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<!-- ============================
+     PARTICLE CANVAS
+============================= -->
+<!-- Aurora blobs -->
+<div class="aurora">
+  <div class="aurora-blob a1"></div>
+  <div class="aurora-blob a2"></div>
+  <div class="aurora-blob a3"></div>
+  <div class="aurora-blob a4"></div>
+</div>
+
+<canvas id="bg-canvas"></canvas>
+
+<!-- ============================
+     NAVBAR
+============================= -->
+<header class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="#home" class="nav-logo">PM<span class="ac">.</span></a>
+
+    <nav class="nav-links" id="desktop-nav">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <a href="#contact" class="nav-hire"><span>Hire Me</span></a>
+
+    <button class="nav-burger" id="hamburger" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mob-menu" id="mob-menu">
+  <button class="mob-close" id="mob-close" aria-label="Close menu">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+  <nav class="mob-nav">
+    <a href="#about" class="mob-link">About</a>
+    <a href="#skills" class="mob-link">Skills</a>
+    <a href="#experience" class="mob-link">Experience</a>
+    <a href="#projects" class="mob-link">Projects</a>
+    <a href="#contact" class="mob-link">Contact</a>
+  </nav>
+</div>
+
+<!-- ============================
+     HERO
+============================= -->
+<section id="home" class="hero-section">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow-orb"></div>
+  <canvas id="hero-3d"></canvas>
+  <div class="hero-vignette"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Available for Opportunities
+    </div>
+
+    <h1 class="hero-title">
+      <span class="title-solid">PARV</span>
+      <span class="title-outline">MER</span>
+    </h1>
+
+    <div class="hero-typed-row">
+      <span class="typed-label">I build </span>
+      <span class="typed-value" id="typed-word"></span>
+      <span class="typed-caret">|</span>
+    </div>
+
+    <p class="hero-desc">
+      Flutter Developer crafting production-ready mobile applications with<br class="br-hide" />
+      beautiful interfaces, real-time GPS tracking, and Firebase-powered backends.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#projects" class="btn-solid">View Projects</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-val">2+</span>
+        <span class="stat-lbl">Years Coding</span>
+      </div>
+      <div class="stat-rule"></div>
+      <div class="stat-item">
+        <span class="stat-val">6–7</span>
+        <span class="stat-lbl">Apps Built</span>
+      </div>
+      <div class="stat-rule"></div>
+      <div class="stat-item">
+        <span class="stat-val">4+</span>
+        <span class="stat-lbl">Months Interned</span>
+      </div>
+      <div class="stat-rule"></div>
+      <div class="stat-item">
+        <span class="stat-val">15+</span>
+        <span class="stat-lbl">Technologies</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-bar"></div>
+    <span>scroll</span>
+  </div>
+</section>
+
+<!-- ============================
+     ABOUT
+============================= -->
+<section id="about" class="section about-section">
+  <div class="section-container">
+    <div class="about-layout">
+
+      <!-- Visual side -->
+      <div class="about-visual" data-aos="fade-right">
+        <div class="photo-frame" id="photo-frame">
+          <div class="photo-frame-inner">
+          <div class="frame-corner fc-tl"></div>
+          <div class="frame-corner fc-tr"></div>
+          <div class="frame-corner fc-bl"></div>
+          <div class="frame-corner fc-br"></div>
+          <div class="photo-box">
+            <img src="assets/images/profile.jpeg" alt="Parv Mer — Flutter Developer" id="profile-img" loading="lazy" decoding="async" />
+            <div class="photo-initials" id="photo-initials">PM</div>
+          </div>
+          </div>
+        </div>
+        <div class="about-badge ab1">
+          <i class="fa-solid fa-location-dot"></i>
+          <div>
+            <strong>Rajkot, Gujarat</strong>
+            <span>India</span>
+          </div>
+        </div>
+        <div class="about-badge ab2">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <div>
+            <strong>MCA — JAIN</strong>
+            <span>Bangalore, 2025–27</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Text side -->
+      <div class="about-text" data-aos="fade-left">
+        <span class="eyebrow">About Me</span>
+        <h2 class="section-title">Flutter Developer<br />&amp; Mobile Engineer</h2>
+
+        <p class="body-p">
+          Flutter Developer with <strong>2+ years</strong> of hands-on coding experience, including 4 months of on-site internship at Divine IT Solutions, Rajkot. I specialize in building production-level mobile applications with smooth animations, real-time data integration, and clean architecture patterns.
+        </p>
+        <p class="body-p">
+          Worked across <strong>6–7 complete applications</strong> — from real-time GPS bus tracking systems to offline peer-to-peer file sharing tools — gaining deep expertise in the full Flutter development lifecycle, from UI design to Play Store deployment. Currently pursuing MCA at JAIN (Deemed-to-be University), Bangalore.
+        </p>
+
+        <!-- Journey Timeline -->
+        <div class="journey">
+          <div class="journey-line"></div>
+          <div class="j-item">
+            <div class="j-dot"></div>
+            <span class="j-year">2022</span>
+            <div class="j-info">
+              <h4>BCA — Atmiya University, Rajkot</h4>
+              <p>Began Computer Applications studies</p>
+            </div>
+          </div>
+          <div class="j-item">
+            <div class="j-dot"></div>
+            <span class="j-year">2024</span>
+            <div class="j-info">
+              <h4>Entered Flutter Development</h4>
+              <p>Mastered Dart, Firebase &amp; maps integration</p>
+            </div>
+          </div>
+          <div class="j-item">
+            <div class="j-dot"></div>
+            <span class="j-year">2025</span>
+            <div class="j-info">
+              <h4>Internship — Divine IT Solutions</h4>
+              <p>4 months on-site · 6–7 production apps shipped</p>
+            </div>
+          </div>
+          <div class="j-item j-active">
+            <div class="j-dot"></div>
+            <span class="j-year">Now</span>
+            <div class="j-info">
+              <h4>MCA — JAIN University, Bangalore</h4>
+              <p>Continuing to grow, build &amp; explore</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="social-links">
+          <a href="https://github.com/Parvmer26" target="_blank" rel="noopener" class="s-chip"><i class="fa-brands fa-github"></i> GitHub</a>
+          <a href="https://www.linkedin.com/in/parvmer26" target="_blank" rel="noopener" class="s-chip"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+          <a href="https://x.com/ItsParvmer" target="_blank" rel="noopener" class="s-chip"><i class="fa-brands fa-x-twitter"></i> Twitter</a>
+          <a href="https://www.instagram.com/itsparvmer" target="_blank" rel="noopener" class="s-chip"><i class="fa-brands fa-instagram"></i> Instagram</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SKILLS
+============================= -->
+<section id="skills" class="section skills-section">
+  <div class="section-container">
+    <span class="eyebrow">What I Know</span>
+    <h2 class="section-title">Skills &amp; Expertise</h2>
+
+    <!-- Marquee -->
+    <div class="marquee-outer">
+      <div class="marquee-inner">
+        <div class="marquee-track">
+          <span>Flutter</span><span>Dart</span><span>Firebase</span><span>GetX</span><span>Provider</span><span>REST APIs</span><span>OpenStreetMap</span><span>GPS Integration</span><span>Nearby Connections</span><span>QR Code</span><span>Material Design</span><span>Lottie</span><span>Git &amp; GitHub</span><span>Android Studio</span><span>Firestore</span><span>Cloud Storage</span><span>HTML</span><span>CSS</span><span>JavaScript</span>
+          <span>Flutter</span><span>Dart</span><span>Firebase</span><span>GetX</span><span>Provider</span><span>REST APIs</span><span>OpenStreetMap</span><span>GPS Integration</span><span>Nearby Connections</span><span>QR Code</span><span>Material Design</span><span>Lottie</span><span>Git &amp; GitHub</span><span>Android Studio</span><span>Firestore</span><span>Cloud Storage</span><span>HTML</span><span>CSS</span><span>JavaScript</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skill categories -->
+    <div class="skill-grid">
+
+      <div class="skill-card" data-aos="fade-up">
+        <div class="skill-card-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+        <h3>Mobile &amp; UI</h3>
+        <div class="skill-bars">
+          <div class="sbar-item">
+            <div class="sbar-meta"><span>Flutter</span><span>95%</span></div>
+            <div class="sbar-track"><div class="sbar-fill" data-w="95"></div></div>
+          </div>
+          <div class="sbar-item">
+            <div class="sbar-meta"><span>Dart</span><span>90%</span></div>
+            <div class="sbar-track"><div class="sbar-fill" data-w="90"></div></div>
+          </div>
+          <div class="sbar-item">
+            <div class="sbar-meta"><span>Material Design &amp; Animations</span><span>88%</span></div>
+            <div class="sbar-track"><div class="sbar-fill" data-w="88"></div></div>
+          </div>
+          <div class="sbar-item">
+            <div class="sbar-meta"><span>Responsive Layouts</span><span>90%</span></div>
+            <div class="sbar-track"><div class="sbar-fill" data-w="90"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="skill-card-icon"><i class="fa-solid fa-cloud"></i></div>
+        <h3>Backend &amp; Cloud</h3>
+        <div class="skill-bars">
+          <div class="sbar-item">
+            <div class="sbar-meta"><span>Firebase (Auth, Firestore, Storage)</span><span>90%</span></div>
+            <div class="sbar-track"><div class="sbar-fill" data-w="90"></div></div>
+          </div>
+          <div class="sbar-item">
+            <div class="sbar-meta"><span>REST API Integration</span><span>85%</span></div>
+            <div class="sbar-track"><div class="sbar-fill" data-w="85"></div></div>
+          </div>
+          <div class="sbar-item">
+            <div class="sbar-meta"><span>GetX &amp; Provider</span><span>85%</span></div>
+            <div class="sbar-track"><div class="sbar-fill" data-w="85"></div></div>
+          </div>
+          <div class="sbar-item">
+            <div class="sbar-meta"><span>Play Store Publishing</span><span>80%</span></div>
+            <div class="sbar-track"><div class="sbar-fill" data-w="80"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="skill-card-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+        <h3>Maps &amp; Device</h3>
+        <div class="skill-bars">
+          <div class="sbar-item">
+            <div class="sbar-meta"><span>GPS &amp; OpenStreetMap</span><span>85%</span></div>
+            <div class="sbar-track"><div class="sbar-fill" data-w="85"></div></div>
+          </div>
+          <div class="sbar-item">
+            <div class="sbar-meta"><span>Nearby Connections API</span><span>82%</span></div>
+            <div class="sbar-track"><div class="sbar-fill" data-w="82"></div></div>
+          </div>
+          <div class="sbar-item">
+            <div class="sbar-meta"><span>QR Code Integration</span><span>85%</span></div>
+            <div class="sbar-track"><div class="sbar-fill" data-w="85"></div></div>
+          </div>
+          <div class="sbar-item">
+            <div class="sbar-meta"><span>Offline Data Handling</span><span>78%</span></div>
+            <div class="sbar-track"><div class="sbar-fill" data-w="78"></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     EXPERIENCE
+============================= -->
+<section id="experience" class="section exp-section">
+  <div class="section-container">
+    <span class="eyebrow">My Journey</span>
+    <h2 class="section-title">Experience</h2>
+
+    <div class="exp-wrapper">
+      <div class="exp-spine"></div>
+
+      <div class="exp-entry" data-aos="fade-up">
+        <div class="exp-node">
+          <div class="exp-node-pulse"></div>
+          <div class="exp-node-core"></div>
+        </div>
+        <div class="exp-card">
+          <div class="exp-card-header">
+            <div class="exp-card-title">
+              <h3>Flutter Developer Intern</h3>
+              <p class="exp-company"><i class="fa-solid fa-building"></i> Divine IT Solutions &nbsp;·&nbsp; On-site, Rajkot</p>
+            </div>
+            <div class="exp-date-badge">Oct 2025 – Feb 2026</div>
+          </div>
+
+          <div class="exp-tech-row">
+            <span>Flutter</span><span>Dart</span><span>Firebase</span><span>GetX</span><span>Provider</span><span>REST API</span><span>Play Store</span>
+          </div>
+
+          <ul class="exp-points">
+            <li><i class="fa-solid fa-circle-check"></i> Led a complete <strong>UI redesign</strong> of a production application, translating design specifications into pixel-perfect Flutter interfaces</li>
+            <li><i class="fa-solid fa-circle-check"></i> Implemented <strong>GetX &amp; Provider</strong> state management across multiple feature modules, improving code maintainability</li>
+            <li><i class="fa-solid fa-circle-check"></i> Built a comprehensive Firebase backend including Authentication, Firestore, Realtime Database, and Cloud Storage</li>
+            <li><i class="fa-solid fa-circle-check"></i> Integrated multiple third-party REST APIs and assisted in publishing applications to <strong>Google Play Store</strong></li>
+            <li><i class="fa-solid fa-circle-check"></i> Designed Play Store assets including app screenshots, icons, and store listing descriptions</li>
+            <li><i class="fa-solid fa-circle-check"></i> Contributed to <strong>6–7 production-level applications</strong>, handling everything from feature development to bug fixing and performance optimization</li>
+          </ul>
+
+          <div class="exp-impact">
+            <span class="impact-label"><i class="fa-solid fa-chart-line"></i> Impact Score</span>
+            <div class="impact-track"><div class="impact-fill" data-w="92"></div></div>
+            <span class="impact-score">92/100</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     PROJECTS
+============================= -->
+<section id="projects" class="section proj-section">
+  <div class="section-container">
+    <span class="eyebrow">My Work</span>
+    <h2 class="section-title">Featured Projects</h2>
+
+    <div class="proj-grid">
+
+      <!-- TrackMate — Featured (full width) -->
+      <div class="proj-card proj-featured" data-aos="fade-up">
+        <div class="proj-spotlight"></div>
+        <div class="proj-body">
+          <div class="proj-head">
+            <span class="proj-index">01</span>
+            <span class="proj-live-badge"><i class="fa-solid fa-graduation-cap"></i> Final Year Project</span>
+          </div>
+          <div class="proj-icon-wrap">
+            <i class="fa-solid fa-bus"></i>
+          </div>
+          <h3>TrackMate</h3>
+          <p class="proj-subtitle">Real-Time Bus Tracking System</p>
+          <p class="proj-desc">
+            A Flutter &amp; Firebase-based school bus tracking application designed for student safety. Delivers live GPS tracking via OpenStreetMap, QR-based student check-ins, and automated SMS alerts to parents. Role-based access control for administrators, conductors, and students ensures real-time monitoring, secure cloud data handling, and efficient communication across all stakeholders.
+          </p>
+          <div class="proj-stack">
+            <span>Flutter</span><span>Firebase</span><span>OpenStreetMap</span><span>GPS</span><span>QR Codes</span><span>SMS Alerts</span>
+          </div>
+          <div class="proj-footer">
+            <a href="https://github.com/Parvmer26/Trackmate_BusTracking_System" target="_blank" rel="noopener" class="proj-btn">
+              <i class="fa-brands fa-github"></i> View on GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Linqdrop -->
+      <div class="proj-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="proj-spotlight"></div>
+        <div class="proj-body">
+          <div class="proj-head">
+            <span class="proj-index">02</span>
+          </div>
+          <div class="proj-icon-wrap">
+            <i class="fa-solid fa-wifi"></i>
+          </div>
+          <h3>Linqdrop</h3>
+          <p class="proj-subtitle">Offline Peer-to-Peer Sharing App</p>
+          <p class="proj-desc">
+            A peer-to-peer Flutter application enabling offline sharing of files, links, and text via QR pairing and Nearby Connections. Supports fast, secure local transfers over Bluetooth and Wi-Fi without internet access. Features a modern Material 3 interface, theme switching, and native sharing integration for seamless communication in zero-network environments.
+          </p>
+          <div class="proj-stack">
+            <span>Flutter</span><span>Nearby Connections</span><span>QR Pairing</span><span>Material 3</span><span>Bluetooth / Wi-Fi</span>
+          </div>
+          <div class="proj-footer">
+            <a href="https://github.com/Parvmer26/Linqdrop" target="_blank" rel="noopener" class="proj-btn">
+              <i class="fa-brands fa-github"></i> View on GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ClimateIQ -->
+      <div class="proj-card" data-aos="fade-up" data-aos-delay="150">
+        <div class="proj-spotlight"></div>
+        <div class="proj-body">
+          <div class="proj-head">
+            <span class="proj-index">03</span>
+          </div>
+          <div class="proj-icon-wrap">
+            <i class="fa-solid fa-cloud-sun"></i>
+          </div>
+          <h3>ClimateIQ</h3>
+          <p class="proj-subtitle">Location-Based Weather App</p>
+          <p class="proj-desc">
+            A location-aware Flutter weather application that fetches real-time conditions via WeatherAPI. Automatically detects the user's GPS location and presents temperature, humidity, wind speed, and weather conditions through a polished UI enhanced with Lottie animations. Includes comprehensive error handling for location permissions and network connectivity issues.
+          </p>
+          <div class="proj-stack">
+            <span>Flutter</span><span>WeatherAPI</span><span>Lottie</span><span>GPS</span><span>Dart</span>
+          </div>
+          <div class="proj-footer">
+            <a href="https://github.com/Parvmer26/ClimateIQ" target="_blank" rel="noopener" class="proj-btn">
+              <i class="fa-brands fa-github"></i> View on GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cartify -->
+      <div class="proj-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="proj-spotlight"></div>
+        <div class="proj-body">
+          <div class="proj-head">
+            <span class="proj-index">04</span>
+          </div>
+          <div class="proj-icon-wrap">
+            <i class="fa-solid fa-cart-shopping"></i>
+          </div>
+          <h3>Cartify</h3>
+          <p class="proj-subtitle">E-Commerce UI Application</p>
+          <p class="proj-desc">
+            A modern Flutter-based e-commerce interface showcasing premium products with a clean, responsive design. Features dynamic product grids, smooth navigation transitions, and cart functionality powered by state management. Built with GridView and ListView widgets, the app delivers an elegant shopping experience and serves as a scalable foundation for full-featured retail applications.
+          </p>
+          <div class="proj-stack">
+            <span>Flutter</span><span>Dart</span><span>State Management</span><span>GridView</span><span>ListView</span>
+          </div>
+          <div class="proj-footer">
+            <a href="https://github.com/Parvmer26/EcommerceApp" target="_blank" rel="noopener" class="proj-btn">
+              <i class="fa-brands fa-github"></i> View on GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     TESTIMONIALS
+============================= -->
+<section class="section testi-section">
+  <div class="section-container">
+    <span class="eyebrow">Kind Words</span>
+    <h2 class="section-title">Testimonials</h2>
+
+    <div class="testi-grid">
+
+      <div class="testi-card" data-aos="fade-up">
+        <div class="testi-quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+        <p>"During his internship, Parv showcased excellent UI design skills and strong independence. He quickly understood project goals and delivered clean, functional code for our development modules."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">M</div>
+          <div>
+            <strong>Mentor</strong>
+            <span>Zentech Solution</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="testi-quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+        <p>"Parv's attention to detail and passion for building user-friendly applications stood out from day one. His GPS tracking implementation and real-time updates in TrackMate were truly impressive."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">T</div>
+          <div>
+            <strong>Technical Reviewer</strong>
+            <span>Final Year Jury</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="testi-quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+        <p>"TrackMate was one of the most complete and well-implemented student projects I have seen in my years of reviewing final-year submissions. A truly production-ready application."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">D</div>
+          <div>
+            <strong>Prof. Dhaval</strong>
+            <span>Atmiya University</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     CONTACT
+============================= -->
+<section id="contact" class="section contact-section">
+  <div class="section-container">
+    <span class="eyebrow">Let's Talk</span>
+    <h2 class="section-title">Get In Touch</h2>
+    <p class="contact-intro">Have a project in mind or want to discuss opportunities? I'd love to hear from you and explore how we can build something great together.</p>
+
+    <div class="contact-layout">
+
+      <div class="contact-info" data-aos="fade-right">
+        <div class="ci-row">
+          <div class="ci-icon-wrap"><i class="fa-solid fa-envelope"></i></div>
+          <div>
+  <span class="ci-label">Email</span>
+  <a 
+    href="https://mail.google.com/mail/?view=cm&fs=1&to=parvmer32@gmail.com" 
+    target="_blank" 
+    rel="noopener noreferrer"
+  >
+    parvmer32@gmail.com
+  </a>
+</div>
+        </div>
+        <div class="ci-row">
+          <div class="ci-icon-wrap"><i class="fa-solid fa-location-dot"></i></div>
+          <div>
+            <span class="ci-label">Location</span>
+            <span>Rajkot, Gujarat, India</span>
+          </div>
+        </div>
+        <div class="ci-row">
+          <div class="ci-icon-wrap"><i class="fa-solid fa-phone"></i></div>
+          <div>
+            <span class="ci-label">Phone</span>
+            <a href="tel:+919429576276">+91 94295 76276</a>
+          </div>
+        </div>
+        <div class="ci-row">
+          <div class="ci-icon-wrap"><i class="fa-brands fa-github"></i></div>
+          <div>
+            <span class="ci-label">GitHub</span>
+            <a href="https://github.com/Parvmer26" target="_blank" rel="noopener">github.com/Parvmer26</a>
+          </div>
+        </div>
+
+        <div class="contact-socials">
+          <a href="https://github.com/Parvmer26" target="_blank" rel="noopener" class="soc-btn" aria-label="GitHub">
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/parvmer26" target="_blank" rel="noopener" class="soc-btn" aria-label="LinkedIn">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+          <a href="https://x.com/ItsParvmer" target="_blank" rel="noopener" class="soc-btn" aria-label="X / Twitter">
+            <i class="fa-brands fa-x-twitter"></i>
+          </a>
+          <a href="https://www.instagram.com/itsparvmer" target="_blank" rel="noopener" class="soc-btn" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-form-box" data-aos="fade-left">
+  <form id="contact-form" novalidate>
+
+    <div class="form-row-2">
+      <div class="fg">
+        <label for="f-name">Name</label>
+        <input 
+          id="f-name" 
+          type="text" 
+          name="from_name"
+          placeholder="Your full name" 
+          required 
+        />
+      </div>
+
+      <div class="fg">
+        <label for="f-email">Email</label>
+        <input 
+          id="f-email" 
+          type="email" 
+          name="from_email"
+          placeholder="your@email.com" 
+          required 
+        />
+      </div>
+    </div>
+
+    <div class="fg">
+      <label for="f-subject">Subject</label>
+      <input 
+        id="f-subject" 
+        type="text" 
+        name="subject"
+        placeholder="What's this about?" 
+      />
+    </div>
+
+    <div class="fg">
+      <label for="f-msg">Message</label>
+      <textarea 
+        id="f-msg" 
+        rows="5" 
+        name="message"
+        placeholder="Tell me about your project or opportunity..."
+      ></textarea>
+    </div>
+
+    <button type="submit" class="btn-solid btn-full" id="submit-btn">
+      <i class="fa-solid fa-paper-plane"></i> Send Message
+    </button>
+
+  </form>
+</div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     FOOTER
+============================= -->
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="f-logo">PM<span class="ac">.</span></div>
+    <p>Designed &amp; developed by <strong>Parv Mer</strong> &nbsp;·&nbsp; Flutter Developer &nbsp;·&nbsp; Rajkot, India</p>
+    <a href="#home" class="back-top">
+      <i class="fa-solid fa-arrow-up"></i> Top
+    </a>
+  </div>
+</footer>
+
+<!-- EmailJS — deferred, not needed until form submit -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
+<script src="script.js" defer></script>
+</body>
+</html>
