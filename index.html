@@ -3,43 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
   <title>Parv Mer | Flutter Developer</title>
   <meta name="description" content="Flutter Developer crafting production-ready mobile applications with real-time GPS tracking, Firebase backends, and exceptional user interfaces." />
   <meta name="theme-color" content="#060a10" />
 
-  <!-- Favicon — inline SVG data URI, no file needed -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%2304070f'/><text x='50' y='68' font-family='Arial Black,sans-serif' font-size='44' font-weight='900' text-anchor='middle' fill='%2300e5b0'>PM</text></svg>" />
   <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%2304070f'/><text x='50' y='68' font-family='Arial Black,sans-serif' font-size='44' font-weight='900' text-anchor='middle' fill='%2300e5b0'>PM</text></svg>" />
 
-  <!-- DNS prefetch for external resources -->
   <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
   <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
   <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
 
-  <!-- Fonts — display=swap prevents FOIT, crossorigin needed for preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
 
-  <!-- Font Awesome — defer non-render-blocking version -->
+  <!-- Font Awesome deferred -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'" />
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" /></noscript>
 
-  <!-- GSAP — load synchronously (needed before DOMContentLoaded) -->
+  <!-- GSAP — needed synchronously -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-  <!-- Three.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<!-- ============================
-     LOADER
-============================= -->
+<!-- LOADER -->
 <div id="loader">
   <canvas id="loader-canvas"></canvas>
   <div class="loader-content">
@@ -54,16 +45,11 @@
   <div class="loader-status" id="loader-status">Initializing...</div>
 </div>
 
-<!-- ============================
-     CURSOR (desktop only)
-============================= -->
+<!-- CURSOR (desktop only) -->
 <div class="cursor-dot" id="cursor-dot"></div>
 <div class="cursor-ring" id="cursor-ring"></div>
 
-<!-- ============================
-     PARTICLE CANVAS
-============================= -->
-<!-- Aurora blobs -->
+<!-- AURORA BLOBS -->
 <div class="aurora">
   <div class="aurora-blob a1"></div>
   <div class="aurora-blob a2"></div>
@@ -71,15 +57,13 @@
   <div class="aurora-blob a4"></div>
 </div>
 
+<!-- PARTICLE CANVAS -->
 <canvas id="bg-canvas"></canvas>
 
-<!-- ============================
-     NAVBAR
-============================= -->
+<!-- NAVBAR -->
 <header class="navbar" id="navbar">
   <div class="nav-container">
     <a href="#home" class="nav-logo">PM<span class="ac">.</span></a>
-
     <nav class="nav-links" id="desktop-nav">
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
@@ -87,13 +71,9 @@
       <a href="#projects">Projects</a>
       <a href="#contact">Contact</a>
     </nav>
-
     <a href="#contact" class="nav-hire"><span>Hire Me</span></a>
-
     <button class="nav-burger" id="hamburger" aria-label="Toggle menu">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </button>
   </div>
 </header>
@@ -112,9 +92,7 @@
   </nav>
 </div>
 
-<!-- ============================
-     HERO
-============================= -->
+<!-- HERO -->
 <section id="home" class="hero-section">
   <div class="hero-grid-bg"></div>
   <div class="hero-glow-orb"></div>
@@ -177,25 +155,21 @@
   </div>
 </section>
 
-<!-- ============================
-     ABOUT
-============================= -->
+<!-- ABOUT -->
 <section id="about" class="section about-section">
   <div class="section-container">
     <div class="about-layout">
-
-      <!-- Visual side -->
       <div class="about-visual" data-aos="fade-right">
         <div class="photo-frame" id="photo-frame">
           <div class="photo-frame-inner">
-          <div class="frame-corner fc-tl"></div>
-          <div class="frame-corner fc-tr"></div>
-          <div class="frame-corner fc-bl"></div>
-          <div class="frame-corner fc-br"></div>
-          <div class="photo-box">
-            <img src="assets/images/profile.jpeg" alt="Parv Mer — Flutter Developer" id="profile-img" loading="eager" decoding="sync" />
-            <div class="photo-initials" id="photo-initials">PM</div>
-          </div>
+            <div class="frame-corner fc-tl"></div>
+            <div class="frame-corner fc-tr"></div>
+            <div class="frame-corner fc-bl"></div>
+            <div class="frame-corner fc-br"></div>
+            <div class="photo-box">
+              <img src="assets/images/profile.jpeg" alt="Parv Mer — Flutter Developer" id="profile-img" loading="eager" decoding="sync" />
+              <div class="photo-initials" id="photo-initials">PM</div>
+            </div>
           </div>
         </div>
         <div class="about-badge ab1">
@@ -214,7 +188,6 @@
         </div>
       </div>
 
-      <!-- Text side -->
       <div class="about-text" data-aos="fade-left">
         <span class="eyebrow">About Me</span>
         <h2 class="section-title">Flutter Developer<br />&amp; Mobile Engineer</h2>
@@ -226,7 +199,6 @@
           Worked across <strong>6–7 complete applications</strong> — from real-time GPS bus tracking systems to offline peer-to-peer file sharing tools — gaining deep expertise in the full Flutter development lifecycle, from UI design to Play Store deployment. Currently pursuing MCA at JAIN (Deemed-to-be University), Bangalore.
         </p>
 
-        <!-- Journey Timeline -->
         <div class="journey">
           <div class="journey-line"></div>
           <div class="j-item">
@@ -270,20 +242,16 @@
           <a href="https://www.instagram.com/itsparvmer" target="_blank" rel="noopener" class="s-chip"><i class="fa-brands fa-instagram"></i> Instagram</a>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ============================
-     SKILLS
-============================= -->
+<!-- SKILLS -->
 <section id="skills" class="section skills-section">
   <div class="section-container">
     <span class="eyebrow">What I Know</span>
     <h2 class="section-title">Skills &amp; Expertise</h2>
 
-    <!-- Marquee -->
     <div class="marquee-outer">
       <div class="marquee-inner">
         <div class="marquee-track">
@@ -293,9 +261,7 @@
       </div>
     </div>
 
-    <!-- Skill categories -->
     <div class="skill-grid">
-
       <div class="skill-card" data-aos="fade-up">
         <div class="skill-card-icon"><i class="fa-solid fa-mobile-screen"></i></div>
         <h3>Mobile &amp; UI</h3>
@@ -364,14 +330,11 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ============================
-     EXPERIENCE
-============================= -->
+<!-- EXPERIENCE -->
 <section id="experience" class="section exp-section">
   <div class="section-container">
     <span class="eyebrow">My Journey</span>
@@ -379,7 +342,6 @@
 
     <div class="exp-wrapper">
       <div class="exp-spine"></div>
-
       <div class="exp-entry" data-aos="fade-up">
         <div class="exp-node">
           <div class="exp-node-pulse"></div>
@@ -393,11 +355,9 @@
             </div>
             <div class="exp-date-badge">Oct 2025 – Feb 2026</div>
           </div>
-
           <div class="exp-tech-row">
             <span>Flutter</span><span>Dart</span><span>Firebase</span><span>GetX</span><span>Provider</span><span>REST API</span><span>Play Store</span>
           </div>
-
           <ul class="exp-points">
             <li><i class="fa-solid fa-circle-check"></i> Led a complete <strong>UI redesign</strong> of a production application, translating design specifications into pixel-perfect Flutter interfaces</li>
             <li><i class="fa-solid fa-circle-check"></i> Implemented <strong>GetX &amp; Provider</strong> state management across multiple feature modules, improving code maintainability</li>
@@ -406,7 +366,6 @@
             <li><i class="fa-solid fa-circle-check"></i> Designed Play Store assets including app screenshots, icons, and store listing descriptions</li>
             <li><i class="fa-solid fa-circle-check"></i> Contributed to <strong>6–7 production-level applications</strong>, handling everything from feature development to bug fixing and performance optimization</li>
           </ul>
-
           <div class="exp-impact">
             <span class="impact-label"><i class="fa-solid fa-chart-line"></i> Impact Score</span>
             <div class="impact-track"><div class="impact-fill" data-w="92"></div></div>
@@ -414,22 +373,18 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ============================
-     PROJECTS
-============================= -->
+<!-- PROJECTS -->
 <section id="projects" class="section proj-section">
   <div class="section-container">
     <span class="eyebrow">My Work</span>
     <h2 class="section-title">Featured Projects</h2>
 
     <div class="proj-grid">
-
-      <!-- TrackMate — Featured (full width) -->
+      <!-- TrackMate — Featured -->
       <div class="proj-card proj-featured" data-aos="fade-up">
         <div class="proj-spotlight"></div>
         <div class="proj-body">
@@ -437,14 +392,10 @@
             <span class="proj-index">01</span>
             <span class="proj-live-badge"><i class="fa-solid fa-graduation-cap"></i> Final Year Project</span>
           </div>
-          <div class="proj-icon-wrap">
-            <i class="fa-solid fa-bus"></i>
-          </div>
+          <div class="proj-icon-wrap"><i class="fa-solid fa-bus"></i></div>
           <h3>TrackMate</h3>
           <p class="proj-subtitle">Real-Time Bus Tracking System</p>
-          <p class="proj-desc">
-            A Flutter &amp; Firebase-based school bus tracking application designed for student safety. Delivers live GPS tracking via OpenStreetMap, QR-based student check-ins, and automated SMS alerts to parents. Role-based access control for administrators, conductors, and students ensures real-time monitoring, secure cloud data handling, and efficient communication across all stakeholders.
-          </p>
+          <p class="proj-desc">A Flutter &amp; Firebase-based school bus tracking application designed for student safety. Delivers live GPS tracking via OpenStreetMap, QR-based student check-ins, and automated SMS alerts to parents. Role-based access control for administrators, conductors, and students ensures real-time monitoring, secure cloud data handling, and efficient communication across all stakeholders.</p>
           <div class="proj-stack">
             <span>Flutter</span><span>Firebase</span><span>OpenStreetMap</span><span>GPS</span><span>QR Codes</span><span>SMS Alerts</span>
           </div>
@@ -460,17 +411,11 @@
       <div class="proj-card" data-aos="fade-up" data-aos-delay="100">
         <div class="proj-spotlight"></div>
         <div class="proj-body">
-          <div class="proj-head">
-            <span class="proj-index">02</span>
-          </div>
-          <div class="proj-icon-wrap">
-            <i class="fa-solid fa-wifi"></i>
-          </div>
+          <div class="proj-head"><span class="proj-index">02</span></div>
+          <div class="proj-icon-wrap"><i class="fa-solid fa-wifi"></i></div>
           <h3>Linqdrop</h3>
           <p class="proj-subtitle">Offline Peer-to-Peer Sharing App</p>
-          <p class="proj-desc">
-            A peer-to-peer Flutter application enabling offline sharing of files, links, and text via QR pairing and Nearby Connections. Supports fast, secure local transfers over Bluetooth and Wi-Fi without internet access. Features a modern Material 3 interface, theme switching, and native sharing integration for seamless communication in zero-network environments.
-          </p>
+          <p class="proj-desc">A peer-to-peer Flutter application enabling offline sharing of files, links, and text via QR pairing and Nearby Connections. Supports fast, secure local transfers over Bluetooth and Wi-Fi without internet access. Features a modern Material 3 interface, theme switching, and native sharing integration for seamless communication in zero-network environments.</p>
           <div class="proj-stack">
             <span>Flutter</span><span>Nearby Connections</span><span>QR Pairing</span><span>Material 3</span><span>Bluetooth / Wi-Fi</span>
           </div>
@@ -486,17 +431,11 @@
       <div class="proj-card" data-aos="fade-up" data-aos-delay="150">
         <div class="proj-spotlight"></div>
         <div class="proj-body">
-          <div class="proj-head">
-            <span class="proj-index">03</span>
-          </div>
-          <div class="proj-icon-wrap">
-            <i class="fa-solid fa-cloud-sun"></i>
-          </div>
+          <div class="proj-head"><span class="proj-index">03</span></div>
+          <div class="proj-icon-wrap"><i class="fa-solid fa-cloud-sun"></i></div>
           <h3>ClimateIQ</h3>
           <p class="proj-subtitle">Location-Based Weather App</p>
-          <p class="proj-desc">
-            A location-aware Flutter weather application that fetches real-time conditions via WeatherAPI. Automatically detects the user's GPS location and presents temperature, humidity, wind speed, and weather conditions through a polished UI enhanced with Lottie animations. Includes comprehensive error handling for location permissions and network connectivity issues.
-          </p>
+          <p class="proj-desc">A location-aware Flutter weather application that fetches real-time conditions via WeatherAPI. Automatically detects the user's GPS location and presents temperature, humidity, wind speed, and weather conditions through a polished UI enhanced with Lottie animations. Includes comprehensive error handling for location permissions and network connectivity issues.</p>
           <div class="proj-stack">
             <span>Flutter</span><span>WeatherAPI</span><span>Lottie</span><span>GPS</span><span>Dart</span>
           </div>
@@ -512,17 +451,11 @@
       <div class="proj-card" data-aos="fade-up" data-aos-delay="200">
         <div class="proj-spotlight"></div>
         <div class="proj-body">
-          <div class="proj-head">
-            <span class="proj-index">04</span>
-          </div>
-          <div class="proj-icon-wrap">
-            <i class="fa-solid fa-cart-shopping"></i>
-          </div>
+          <div class="proj-head"><span class="proj-index">04</span></div>
+          <div class="proj-icon-wrap"><i class="fa-solid fa-cart-shopping"></i></div>
           <h3>Cartify</h3>
           <p class="proj-subtitle">E-Commerce UI Application</p>
-          <p class="proj-desc">
-            A modern Flutter-based e-commerce interface showcasing premium products with a clean, responsive design. Features dynamic product grids, smooth navigation transitions, and cart functionality powered by state management. Built with GridView and ListView widgets, the app delivers an elegant shopping experience and serves as a scalable foundation for full-featured retail applications.
-          </p>
+          <p class="proj-desc">A modern Flutter-based e-commerce interface showcasing premium products with a clean, responsive design. Features dynamic product grids, smooth navigation transitions, and cart functionality powered by state management. Built with GridView and ListView widgets, the app delivers an elegant shopping experience and serves as a scalable foundation for full-featured retail applications.</p>
           <div class="proj-stack">
             <span>Flutter</span><span>Dart</span><span>State Management</span><span>GridView</span><span>ListView</span>
           </div>
@@ -533,64 +466,45 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ============================
-     TESTIMONIALS
-============================= -->
+<!-- TESTIMONIALS -->
 <section class="section testi-section">
   <div class="section-container">
     <span class="eyebrow">Kind Words</span>
     <h2 class="section-title">Testimonials</h2>
-
     <div class="testi-grid">
-
       <div class="testi-card" data-aos="fade-up">
         <div class="testi-quote-icon"><i class="fa-solid fa-quote-left"></i></div>
         <p>"During his internship, Parv showcased excellent UI design skills and strong independence. He quickly understood project goals and delivered clean, functional code for our development modules."</p>
         <div class="testi-author">
           <div class="testi-avatar">M</div>
-          <div>
-            <strong>Mentor</strong>
-            <span>Zentech Solution</span>
-          </div>
+          <div><strong>Mentor</strong><span>Zentech Solution</span></div>
         </div>
       </div>
-
       <div class="testi-card" data-aos="fade-up" data-aos-delay="100">
         <div class="testi-quote-icon"><i class="fa-solid fa-quote-left"></i></div>
         <p>"Parv's attention to detail and passion for building user-friendly applications stood out from day one. His GPS tracking implementation and real-time updates in TrackMate were truly impressive."</p>
         <div class="testi-author">
           <div class="testi-avatar">T</div>
-          <div>
-            <strong>Technical Reviewer</strong>
-            <span>Final Year Jury</span>
-          </div>
+          <div><strong>Technical Reviewer</strong><span>Final Year Jury</span></div>
         </div>
       </div>
-
       <div class="testi-card" data-aos="fade-up" data-aos-delay="200">
         <div class="testi-quote-icon"><i class="fa-solid fa-quote-left"></i></div>
         <p>"TrackMate was one of the most complete and well-implemented student projects I have seen in my years of reviewing final-year submissions. A truly production-ready application."</p>
         <div class="testi-author">
           <div class="testi-avatar">D</div>
-          <div>
-            <strong>Prof. Dhaval</strong>
-            <span>Atmiya University</span>
-          </div>
+          <div><strong>Prof. Dhaval</strong><span>Atmiya University</span></div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ============================
-     CONTACT
-============================= -->
+<!-- CONTACT -->
 <section id="contact" class="section contact-section">
   <div class="section-container">
     <span class="eyebrow">Let's Talk</span>
@@ -598,20 +512,13 @@
     <p class="contact-intro">Have a project in mind or want to discuss opportunities? I'd love to hear from you and explore how we can build something great together.</p>
 
     <div class="contact-layout">
-
       <div class="contact-info" data-aos="fade-right">
         <div class="ci-row">
           <div class="ci-icon-wrap"><i class="fa-solid fa-envelope"></i></div>
           <div>
-  <span class="ci-label">Email</span>
-  <a 
-    href="https://mail.google.com/mail/?view=cm&fs=1&to=parvmer32@gmail.com" 
-    target="_blank" 
-    rel="noopener noreferrer"
-  >
-    <span class="__cf_email__" data-cfemail="aadacbd8dcc7cfd89998eacdc7cbc3c684c9c5c7">[email&#160;protected]</span>
-  </a>
-</div>
+            <span class="ci-label">Email</span>
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=parvmer32@gmail.com" target="_blank" rel="noopener noreferrer">parvmer32@gmail.com</a>
+          </div>
         </div>
         <div class="ci-row">
           <div class="ci-icon-wrap"><i class="fa-solid fa-location-dot"></i></div>
@@ -634,95 +541,53 @@
             <a href="https://github.com/Parvmer26" target="_blank" rel="noopener">github.com/Parvmer26</a>
           </div>
         </div>
-
         <div class="contact-socials">
-          <a href="https://github.com/Parvmer26" target="_blank" rel="noopener" class="soc-btn" aria-label="GitHub">
-            <i class="fa-brands fa-github"></i>
-          </a>
-          <a href="https://www.linkedin.com/in/parvmer26" target="_blank" rel="noopener" class="soc-btn" aria-label="LinkedIn">
-            <i class="fa-brands fa-linkedin-in"></i>
-          </a>
-          <a href="https://x.com/ItsParvmer" target="_blank" rel="noopener" class="soc-btn" aria-label="X / Twitter">
-            <i class="fa-brands fa-x-twitter"></i>
-          </a>
-          <a href="https://www.instagram.com/itsparvmer" target="_blank" rel="noopener" class="soc-btn" aria-label="Instagram">
-            <i class="fa-brands fa-instagram"></i>
-          </a>
+          <a href="https://github.com/Parvmer26" target="_blank" rel="noopener" class="soc-btn" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/parvmer26" target="_blank" rel="noopener" class="soc-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://x.com/ItsParvmer" target="_blank" rel="noopener" class="soc-btn" aria-label="X / Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://www.instagram.com/itsparvmer" target="_blank" rel="noopener" class="soc-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
         </div>
       </div>
 
       <div class="contact-form-box" data-aos="fade-left">
-  <form id="contact-form" novalidate>
-
-    <div class="form-row-2">
-      <div class="fg">
-        <label for="f-name">Name</label>
-        <input 
-          id="f-name" 
-          type="text" 
-          name="from_name"
-          placeholder="Your full name" 
-          required 
-        />
+        <form id="contact-form" novalidate>
+          <div class="form-row-2">
+            <div class="fg">
+              <label for="f-name">Name</label>
+              <input id="f-name" type="text" name="from_name" placeholder="Your full name" required />
+            </div>
+            <div class="fg">
+              <label for="f-email">Email</label>
+              <input id="f-email" type="email" name="from_email" placeholder="your@email.com" required />
+            </div>
+          </div>
+          <div class="fg">
+            <label for="f-subject">Subject</label>
+            <input id="f-subject" type="text" name="subject" placeholder="What's this about?" />
+          </div>
+          <div class="fg">
+            <label for="f-msg">Message</label>
+            <textarea id="f-msg" rows="5" name="message" placeholder="Tell me about your project or opportunity..."></textarea>
+          </div>
+          <button type="submit" class="btn-solid btn-full" id="submit-btn">
+            <i class="fa-solid fa-paper-plane"></i> Send Message
+          </button>
+        </form>
       </div>
-
-      <div class="fg">
-        <label for="f-email">Email</label>
-        <input 
-          id="f-email" 
-          type="email" 
-          name="from_email"
-          placeholder="your@email.com" 
-          required 
-        />
-      </div>
-    </div>
-
-    <div class="fg">
-      <label for="f-subject">Subject</label>
-      <input 
-        id="f-subject" 
-        type="text" 
-        name="subject"
-        placeholder="What's this about?" 
-      />
-    </div>
-
-    <div class="fg">
-      <label for="f-msg">Message</label>
-      <textarea 
-        id="f-msg" 
-        rows="5" 
-        name="message"
-        placeholder="Tell me about your project or opportunity..."
-      ></textarea>
-    </div>
-
-    <button type="submit" class="btn-solid btn-full" id="submit-btn">
-      <i class="fa-solid fa-paper-plane"></i> Send Message
-    </button>
-
-  </form>
-</div>
-
     </div>
   </div>
 </section>
 
-<!-- ============================
-     FOOTER
-============================= -->
+<!-- FOOTER -->
 <footer class="site-footer">
   <div class="footer-container">
     <div class="f-logo">PM<span class="ac">.</span></div>
     <p>Designed &amp; developed by <strong>Parv Mer</strong> &nbsp;·&nbsp; Flutter Developer &nbsp;·&nbsp; Rajkot, India</p>
-    <a href="#home" class="back-top">
-      <i class="fa-solid fa-arrow-up"></i> Top
-    </a>
+    <a href="#home" class="back-top"><i class="fa-solid fa-arrow-up"></i> Top</a>
   </div>
 </footer>
 
-<!-- EmailJS — deferred, not needed until form submit -->
+<!-- EmailJS deferred -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
 <script src="script.js" defer></script>
 </body>
