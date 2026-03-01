@@ -787,10 +787,33 @@ $$('.mob-link').forEach(l => l.addEventListener('click', closeMenu));
 ═══════════════════════════════════════════════════════════════ */
 const pImg = document.getElementById('profile-img');
 const pFb  = document.getElementById('photo-initials');
+
+// Try multiple filename variants so it always works regardless of exact name used
+const IMG_PATHS = [
+  'assets/images/profile.jpeg',
+  'assets/images/profile.jpg',
+  'assets/images/profile2.jpeg',
+  'assets/images/profile2.jpg',
+  'assets/images/profile.png',
+  'assets/images/profile.webp',
+];
+
+function showImg() { if(pImg) pImg.style.display='block'; if(pFb) pFb.style.display='none'; }
+function showFb()  { if(pImg) pImg.style.display='none';  if(pFb) pFb.style.display='flex'; }
+
+function tryImgPath(index) {
+  if (index >= IMG_PATHS.length) { showFb(); return; }
+  pImg.onload  = () => showImg();
+  pImg.onerror = () => tryImgPath(index + 1);
+  pImg.src = IMG_PATHS[index];
+}
+
 if (pImg) {
-  pImg.addEventListener('load',  () => { pImg.style.display='block'; if(pFb) pFb.style.display='none'; });
-  pImg.addEventListener('error', () => { pImg.style.display='none';  if(pFb) pFb.style.display='flex'; });
-  if (pImg.complete && pImg.naturalWidth) { pImg.style.display='block'; if(pFb) pFb.style.display='none'; }
+  if (pImg.complete && pImg.naturalWidth > 0) {
+    showImg();
+  } else {
+    tryImgPath(0);
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════

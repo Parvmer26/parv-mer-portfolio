@@ -195,7 +195,8 @@ body::before {
   word-break: keep-all;
 }
 
-.loader-tagline span { background: linear-gradient(135deg, var(--ac), var(--purple), var(--orange)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+/* Keep loader tagline always white — no gradient on individual chars */
+.loader-tagline span { color: var(--t1); -webkit-text-fill-color: var(--t1); }
 
 .loader-progress {
   display: flex;
@@ -949,10 +950,10 @@ body::before {
   z-index:-1;
   opacity:0;
   background: linear-gradient(135deg, var(--ac), var(--purple), var(--orange));
-  transition:opacity .35s;
+  transition:opacity .55s;
 }
-.skill-card:hover { transform:translateY(-8px) scale(1.01); border-color:transparent; box-shadow:0 24px 60px rgba(0,0,0,.5);transition: 0.5s; }
-.skill-card:hover::before { opacity:.5; transition: 0.5s;}
+.skill-card:hover { transform:translateY(-8px) scale(1.01); border-color:transparent; box-shadow:0 24px 60px rgba(0,0,0,.5);transition: 1s; }
+.skill-card:hover::before { opacity:.5; }
 
 .skill-card:nth-child(2) .skill-card-icon { color:var(--purple); background:rgba(167,139,250,.08); border-color:rgba(167,139,250,.2); }
 .skill-card:nth-child(3) .skill-card-icon { color:var(--orange); background:rgba(249,115,22,.08); border-color:rgba(249,115,22,.2); }
