@@ -663,7 +663,7 @@ body::before {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-stroke: 1px transparent;
-  filter: drop-shadow(0 0 24px rgba(0,229,176,0.5)) drop-shadow(0 4px 20px rgba(0,0,0,0.9));
+  filter: drop-shadow(0 0 5px rgba(0,229,176,0.5)) drop-shadow(0 2px 8px rgba(0,0,0,0.9));
 }
 
 .hero-typed-row {
