@@ -351,6 +351,7 @@ document.addEventListener('visibilitychange', () => {
   function tick(now) {
     requestAnimationFrame(tick);
     if (!pageVisible) return;
+    if (window._loaderActive) return; // don't render hero while loader is showing
     if (now - lastHero < HERO_MS) return;
     const dt = Math.min((now - lastHero) / 1000, 0.05);
     lastHero = now;
@@ -408,6 +409,7 @@ document.addEventListener('visibilitychange', () => {
   const tagEl    = $('#loader-tagline');
   const statusEl = $('#loader-status');
   if (!loader) return;
+  window._loaderActive = true; // pause hero 3D while loading
 
   // ── Animated canvas background in loader ──
   const lc = document.getElementById('loader-canvas');
@@ -500,6 +502,7 @@ document.addEventListener('visibilitychange', () => {
     statusEl.textContent='Complete!';
     setTimeout(() => {
       if (window._stopLoaderCanvas) window._stopLoaderCanvas();
+      window._loaderActive = false; // hero 3D can now render
       gsap.to(loader, {
         yPercent:-100, duration:1.1, ease:'power3.inOut',
         onComplete: () => {
@@ -518,6 +521,10 @@ document.addEventListener('visibilitychange', () => {
 gsap.registerPlugin(ScrollTrigger);
 
 function startPageAnimations() {
+
+  /* Remove hero-hidden and let GSAP animate everything from scratch */
+  const heroContent = document.querySelector('.hero-content');
+  if (heroContent) heroContent.classList.remove('hero-hidden');
 
   /* HERO */
   const htl = gsap.timeline({ defaults:{ ease:'power4.out' } });
