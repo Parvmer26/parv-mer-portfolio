@@ -548,6 +548,32 @@ function startPageAnimations() {
   const heroContent = document.querySelector('.hero-content');
   if (heroContent) heroContent.classList.remove('hero-hidden');
 
+  /* ── MOBILE: Skip ALL GSAP scroll animations entirely ──
+     Use CSS IntersectionObserver fade-in instead.
+     Zero JS per frame, zero ScrollTrigger overhead.
+  ── */
+  if (IS_MOBILE()) {
+    /* Hero still animates — it's a one-shot, not scroll-driven */
+    const htl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    htl
+      .from('.hero-badge',     { y:20, opacity:0, duration:.6 })
+      .from('.title-solid',    { y:'80%', opacity:0, duration:.8 }, '-=.2')
+      .from('.title-outline',  { y:'80%', opacity:0, duration:.8 }, '-=.6')
+      .from('.hero-typed-row', { y:16, opacity:0, duration:.6 }, '-=.3')
+      .from('.hero-desc',      { y:14, opacity:0, duration:.6 }, '-=.3')
+      .from('.hero-actions',   { y:14, opacity:0, duration:.5 }, '-=.3')
+      .from('.stat-item',      { y:10, opacity:0, duration:.4, stagger:.08 }, '-=.3')
+      .from('.hero-scroll',    { opacity:0, duration:.4 }, '-=.2');
+
+    /* All scroll sections: CSS class-based fade via IntersectionObserver */
+    initMobileFadeIn();
+    return;
+  }
+
+
+
+  /* ── DESKTOP: Full GSAP as before ── */
+
   /* HERO */
   const htl = gsap.timeline({ defaults: { ease: 'power4.out' } });
   htl
@@ -625,6 +651,56 @@ function startPageAnimations() {
     if (!IS_TOUCH) init3DTiltCard();
     initProjectCardGlow();
     initCardBursts();
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE FADE-IN — IntersectionObserver only, zero GSAP overhead
+   CSS does the transition, JS just toggles a class.
+═══════════════════════════════════════════════════════════════ */
+function initMobileFadeIn() {
+  const targets = $$(
+    '.photo-frame, .about-badge, .about-text .eyebrow, .about-text .section-title, ' +
+    '.about-text .body-p, .j-item, .s-chip, ' +
+    '.skill-card, ' +
+    '.exp-entry, ' +
+    '.proj-card, ' +
+    '.testi-card, ' +
+    '.ci-row, .contact-form-box, ' +
+    '.eyebrow, .section-title, .contact-intro, ' +
+    '.impact-fill, .sbar-fill'
+  );
+
+  /* Set initial hidden state via inline style */
+  targets.forEach(el => {
+    /* Skip skill/impact fills — just set them to full width immediately on mobile */
+    if (el.classList.contains('sbar-fill') || el.classList.contains('impact-fill')) {
+      el.style.width = (el.dataset.w || '100') + '%';
+      return;
+    }
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+        observer.unobserve(el); /* fire once, never watch again */
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  targets.forEach(el => {
+    if (!el.classList.contains('sbar-fill') && !el.classList.contains('impact-fill')) {
+      observer.observe(el);
+    }
   });
 }
 

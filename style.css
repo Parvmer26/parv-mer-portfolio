@@ -1159,6 +1159,8 @@
     position:relative; overflow:hidden;
     contain: layout paint;
     will-change: transform;
+    display: flex;
+    flex-direction: column;
   }
   .testi-card::after {
     content:'';
@@ -1180,7 +1182,7 @@
   .testi-card:nth-child(2) .testi-quote-icon { color:var(--purple); }
   .testi-card:nth-child(3) .testi-quote-icon { color:var(--orange); }
 
-  .testi-card p { color:var(--t2); font-size:14px; line-height:1.75; font-style:italic; margin-bottom:22px; }
+  .testi-card p { color:var(--t2); font-size:14px; line-height:1.75; font-style:italic; margin-bottom:22px;flex: 1; }
   .testi-author { display:flex; align-items:center; gap:12px; }
   .testi-avatar {
     width:42px; height:42px; border-radius:50%;
@@ -1351,6 +1353,12 @@
       -webkit-backdrop-filter: none;
       background: rgba(4,7,15,.97);
     }
+
+    /* Kill ScrollTrigger pin-spacers and markers if any leak through */
+.gsap-marker-start, .gsap-marker-end, .gsap-marker-scroller-start, .gsap-marker-scroller-end { display: none !important; }
+
+/* Disable 3D perspective on cards — no GPU layer cost */
+.proj-card, .skill-card, .testi-card, .exp-card { transform-style: flat; perspective: none; }
   }
 
   @media (max-width:480px) {
