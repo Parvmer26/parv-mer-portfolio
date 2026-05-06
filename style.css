@@ -1402,3 +1402,23 @@
   @media (max-width:440px) {
     .loader-tagline { font-size: clamp(14px, 4vw, 18px); }
   }
+
+  /* ─── CONTACT FORM — disabled button + field errors ─── */
+#submit-btn:disabled {
+  transform: none !important;
+  box-shadow: none !important;
+}
+#submit-btn:disabled::after {
+  display: none;
+}
+.field-error {
+  display: block;
+  font-size: 11px;
+  color: #f87171;
+  margin-top: 5px;
+  font-family: var(--fm);
+}
+.fg input.invalid,
+.fg textarea.invalid {
+  border-color: rgba(248,113,113,.6) !important;
+}

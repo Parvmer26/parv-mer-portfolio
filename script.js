@@ -989,9 +989,8 @@ function initCardBursts() {
     });
   });
 }
-
 /* ═══════════════════════════════════════════════════════════════
-   13. EMAILJS
+   13. EMAILJS + FORM VALIDATION
 ═══════════════════════════════════════════════════════════════ */
 (function () {
   if (typeof emailjs !== 'undefined') {
@@ -1001,33 +1000,123 @@ function initCardBursts() {
 
 const contactForm = document.getElementById('contact-form');
 const submitBtn   = document.getElementById('submit-btn');
+const fName       = document.getElementById('f-name');
+const fEmail      = document.getElementById('f-email');
+const fSubject    = document.getElementById('f-subject');
+const fMsg        = document.getElementById('f-msg');
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+/* Simple check: all fields have something + email looks valid */
+function isFormValid() {
+  if (!fName || !fEmail || !fSubject || !fMsg) return false;
+  return (
+    fName.value.trim()    !== '' &&
+    EMAIL_RE.test(fEmail.value.trim()) &&
+    fSubject.value.trim() !== '' &&
+    fMsg.value.trim()     !== ''
+  );
+}
+
+function updateBtn() {
+  if (!submitBtn) return;
+  const valid = isFormValid();
+  submitBtn.disabled      = !valid;
+  submitBtn.style.opacity = valid ? '1' : '0.45';
+  submitBtn.style.cursor  = valid ? 'pointer' : 'not-allowed';
+}
+
+/* Show/clear red border + error text on email field only */
+function showEmailError(msg) {
+  const old = fEmail && fEmail.parentElement.querySelector('.field-error');
+  if (old) old.remove();
+  if (!fEmail) return;
+
+  if (msg) {
+    fEmail.style.borderColor = 'rgba(248,113,113,.6)';
+    const err = document.createElement('span');
+    err.className   = 'field-error';
+    err.textContent = msg;
+    Object.assign(err.style, {
+      display: 'block', fontSize: '11px',
+      color: '#f87171', marginTop: '5px',
+      fontFamily: 'var(--fm)',
+    });
+    fEmail.parentElement.appendChild(err);
+  } else {
+    fEmail.style.borderColor = '';
+  }
+}
 
 if (contactForm && submitBtn) {
+
+  /* Start disabled */
+  submitBtn.disabled      = true;
+  submitBtn.style.opacity = '0.45';
+  submitBtn.style.cursor  = 'not-allowed';
+
+  /* Watch all fields — re-check on every keystroke */
+  [fName, fEmail, fSubject, fMsg].forEach(el => {
+    if (!el) return;
+    el.addEventListener('input', updateBtn);
+    el.addEventListener('change', updateBtn);
+  });
+
+  /* Email: only show format error after user leaves the field */
+  if (fEmail) {
+    fEmail.addEventListener('blur', () => {
+      const v = fEmail.value.trim();
+      if (v !== '' && !EMAIL_RE.test(v)) {
+        showEmailError('Enter a valid email address.');
+      } else {
+        showEmailError('');
+      }
+      updateBtn();
+    });
+    fEmail.addEventListener('input', () => {
+      if (EMAIL_RE.test(fEmail.value.trim())) showEmailError('');
+      updateBtn();
+    });
+  }
+
+  /* Submit */
   contactForm.addEventListener('submit', function (e) {
     e.preventDefault();
+    if (!isFormValid()) return;
 
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = 'Sending...';
+    submitBtn.disabled      = true;
+    submitBtn.style.opacity = '0.7';
+    submitBtn.style.cursor  = 'not-allowed';
+    submitBtn.innerHTML     = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
 
     if (typeof emailjs === 'undefined') {
-      submitBtn.innerHTML = 'Failed. Try Again';
-      submitBtn.disabled  = false;
+      submitBtn.innerHTML     = '<i class="fa-solid fa-triangle-exclamation"></i> Failed. Try Again';
+      submitBtn.disabled      = false;
+      submitBtn.style.opacity = '1';
+      submitBtn.style.cursor  = 'pointer';
       return;
     }
 
-    emailjs.sendForm('service_74fw2mo', 'template_5ojfi5r', this)
+    emailjs.sendForm('service_74fw2mo', 'template_zzq9ixo', this)
       .then(() => {
-        submitBtn.innerHTML = 'Message Sent ✓';
+        submitBtn.innerHTML     = '<i class="fa-solid fa-circle-check"></i> Message Sent!';
+        submitBtn.style.opacity = '1';
         contactForm.reset();
+        showEmailError('');
+
         setTimeout(() => {
-          submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
-          submitBtn.disabled  = false;
-        }, 3000);
+          submitBtn.innerHTML     = '<i class="fa-solid fa-paper-plane"></i> Drop a Mail';
+          submitBtn.disabled      = true;
+          submitBtn.style.opacity = '0.45';
+          submitBtn.style.cursor  = 'not-allowed';
+        }, 3500);
       })
       .catch(err => {
         console.error(err);
-        submitBtn.innerHTML = 'Failed. Try Again';
-        submitBtn.disabled  = false;
+        submitBtn.innerHTML     = '<i class="fa-solid fa-triangle-exclamation"></i> Failed. Try Again';
+        submitBtn.disabled      = false;
+        submitBtn.style.opacity = '1';
+        submitBtn.style.cursor  = 'pointer';
       });
   });
 }
