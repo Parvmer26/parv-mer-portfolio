@@ -1,9 +1,11 @@
+
 ```
 parv-mer-portfolio
 ├─ assets
 │  ├─ icons
+│  │  └─ favicon.png.png
 │  └─ images
-│     └─ profile.jpg
+│     └─ profile.jpeg
 ├─ index.html
 ├─ README.md
 ├─ script.js
