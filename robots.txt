@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://parv-portfolio.symplyn.in/sitemap.xml

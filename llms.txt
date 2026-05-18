@@ -1,0 +1,17 @@
+Parv Mer
+
+Flutter Developer from Rajkot.
+
+Creator of:
+TrackMate
+Linqdrop
+Playbit
+
+Skills:
+Flutter
+Firebase
+Node.js
+Full Stack Development
+
+Website:
+https://parv-portfolio.symplyn.in

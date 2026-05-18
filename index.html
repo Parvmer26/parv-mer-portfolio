@@ -1,48 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Basic -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Parv Mer | Flutter Developer</title>
+  <title>Parv Mer | Flutter Developer | Rajkot | Portfolio</title>
 
   <meta
     name="description"
-    content="Flutter Developer crafting production-ready mobile applications with real-time GPS tracking, Firebase backends, and exceptional user interfaces."
+    content="Parv Mer is a Flutter Developer from Rajkot, India. Creator of TrackMate, Linqdrop, and Playbit. Specializing in Flutter, Firebase, UI design, real-time systems, and scalable mobile app development."
   />
 
   <meta
     name="keywords"
-    content="Parv Mer, Flutter Developer, Web Developer, Portfolio, Mobile App Developer, Firebase Developer, Rajkot Developer, UI Designer"
+    content="Parv Mer, Parv Mer Portfolio, Flutter Developer Rajkot, Flutter Developer India, Mobile App Developer, Firebase Developer, TrackMate, Linqdrop, Playbit, MCA Developer, UI Designer, Full Stack Developer"
   />
 
   <meta name="author" content="Parv Mer" />
-  <meta name="robots" content="index, follow" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
   <meta name="theme-color" content="#060a10" />
 
-  <!-- Open Graph / Social Sharing -->
-  <meta property="og:title" content="Parv Mer | Flutter Developer" />
-  <meta
-    property="og:description"
-    content="Explore the portfolio of Parv Mer — Flutter Developer building high-performance mobile apps, Firebase solutions, and modern user experiences."
-  />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="./assets/images/profile.jpeg" />
+  <!-- Canonical -->
+  <link rel="canonical" href="https://parv-portfolio.symplyn.in/" />
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Parv Mer | Flutter Developer" />
-  <meta
-    name="twitter:description"
-    content="Flutter Developer crafting modern mobile applications with clean UI and scalable backend systems."
-  />
-  <meta name="twitter:image" content="./assets/images/profile.jpeg" />
-
-  <!-- Favicon -->
+  <!-- Favicons -->
   <link rel="icon" type="image/png" href="./assets/icons/favicon.png" />
   <link rel="apple-touch-icon" href="./assets/icons/favicon.png" />
 
-  <!-- DNS Prefetch -->
+  <!-- Open Graph -->
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Parv Mer | Flutter Developer Portfolio" />
+  <meta
+    property="og:description"
+    content="Explore projects by Parv Mer including TrackMate, Linqdrop and Playbit. Flutter Developer specializing in mobile apps, Firebase and modern UI systems."
+  />
+  <meta property="og:url" content="https://parv-portfolio.symplyn.in/" />
+  <meta property="og:site_name" content="Parv Mer Portfolio" />
+  <meta
+    property="og:image"
+    content="https://parv-portfolio.symplyn.in/assets/images/profile.jpeg"
+  />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta
+    name="twitter:title"
+    content="Parv Mer | Flutter Developer Portfolio"
+  />
+  <meta
+    name="twitter:description"
+    content="Flutter Developer from Rajkot. Creator of TrackMate, Linqdrop and Playbit."
+  />
+  <meta
+    name="twitter:image"
+    content="https://parv-portfolio.symplyn.in/assets/images/profile.jpeg"
+  />
+
+  <!-- Schema.org -->
+ <script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@graph":[
+   {
+     "@type":"Person",
+     "name":"Parv Mer",
+     "url":"https://parv-portfolio.symplyn.in/",
+     "image":"https://parv-portfolio.symplyn.in/assets/images/profile.jpeg",
+     "jobTitle":"Flutter Developer",
+     "description":"Flutter Developer specializing in Flutter, Firebase, mobile applications and scalable UI systems.",
+     "alumniOf":{
+        "@type":"CollegeOrUniversity",
+        "name":"JAIN (Deemed-to-be University)"
+     },
+     "sameAs":[
+       "https://github.com/Parvmer26",
+       "https://www.linkedin.com/in/parvmer26",
+       "https://x.com/ItsParvmer",
+       "https://www.instagram.com/itsparvmer"
+     ],
+     "knowsAbout":[
+        "Flutter",
+        "Firebase",
+        "Dart",
+        "Node.js",
+        "Mobile App Development",
+        "GPS Systems",
+        "Full Stack Development"
+     ]
+   },
+
+   {
+      "@type":"WebSite",
+      "name":"Parv Mer Portfolio",
+      "url":"https://parv-portfolio.symplyn.in/"
+   }
+ ]
+}
+</script>
+
+  <!-- DNS -->
   <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
   <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
   <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
@@ -52,11 +110,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap"
     rel="stylesheet"
   />
 
-  <!-- Font Awesome deferred -->
+  <!-- Font Awesome lazy -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -72,10 +130,10 @@
   </noscript>
 
   <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-  <!-- Styles -->
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -159,6 +217,10 @@
       <span class="title-solid">PARV</span>
       <span class="title-outline">MER</span>
     </h1>
+
+    <p style="display:none">
+Parv Mer is a Flutter Developer from Rajkot, Gujarat, India and creator of TrackMate, Linqdrop and Playbit. Experienced in Firebase, GPS systems, UI design and cross-platform app development.
+</p>
 
     <div class="hero-typed-row">
       <span class="typed-label">I build </span>

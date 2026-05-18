@@ -3,7 +3,7 @@
 parv-mer-portfolio
 ├─ assets
 │  ├─ icons
-│  │  └─ favicon.png.png
+│  │  └─ favicon.png
 │  └─ images
 │     └─ profile.jpeg
 ├─ index.html
